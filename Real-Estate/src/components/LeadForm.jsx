@@ -1,28 +1,66 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { X } from "lucide-react";
+import { X, Home, HomeIcon, Building, Castle, Hotel, LandPlot } from "lucide-react"; // Icons for options
+import Swal from "sweetalert2"; // For beautiful pop-up alerts
 
 const LeadForm = () => {
   const [isOpen, setIsOpen] = useState(true); // Initially open on page load
   const [isMinimized, setIsMinimized] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    number: "",
+    email:"",
+    interest: "",
+  });
 
   useEffect(() => {
     setTimeout(() => setIsOpen(true), 500);
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsOpen(false);
+    setIsMinimized(true);
+
+    // Show a beautiful pop-up alert
+    Swal.fire({
+      title: "Success!",
+      text: "We will contact you shortly.",
+      icon: "success",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#3b82f6",
+      customClass: {
+        popup: "font-poppins",
+      },
+    });
+
+    // Reset form fields
+    setFormData({
+      name: "",
+      number: "",
+      email:"",
+      interest: "",
+    });
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
   return (
     <>
       {/* Dimmed Background Overlay to prevent interaction */}
       {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-80 z-50"></div>
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50"></div>
       )}
 
       {/* Main Form (Pop-up Mode) */}
       <motion.div
-        initial={{ scale: 0.5, opacity: .5 }}
+        initial={{ scale: 0.5, opacity: 0 }}
         animate={isOpen ? { scale: 1, opacity: 1 } : { opacity: 0 }}
         transition={{ type: "spring", stiffness: 100 }}
-        className={`fixed top-1/4 left-1/2 transform -translate-x-1/2 w-1/4 min-w-[300px] bg-white shadow-2xl rounded-lg p-6 border-4 border-blue-600 z-50 ${
+        className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/3 min-w-[400px] bg-gradient-to-br from-gray-600 to-gray-800 bg-opacity-60 shadow-2xl rounded-lg p-8 border-4 border-navy-800 z-50 ${
           isOpen ? "block" : "hidden"
         }`}
       >
@@ -32,62 +70,108 @@ const LeadForm = () => {
             setIsOpen(false);
             setIsMinimized(true);
           }}
-          className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+          className="absolute top-4 right-4 text-white hover:text-gray-200"
         >
           <X size={24} />
         </button>
 
         {/* Form Header */}
-        <h2 className="text-2xl font-bold text-blue-600 mb-4 text-center">
+        <h2 className="text-3xl font-bold text-white mb-6 text-center font-poppins">
           Get a Call Back
         </h2>
 
         {/* Form Fields */}
-        <form className="flex flex-col space-y-3">
+        <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
           <input
             type="text"
+            name="name"
             placeholder="Your Name"
-            className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
+            value={formData.name}
+            onChange={handleChange}
+            className="px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-white bg-white bg-opacity-90 text-gray-900 placeholder-gray-600 text-lg"
           />
           <input
             type="tel"
+            name="number"
             placeholder="Your Number"
-            className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
+            value={formData.number}
+            onChange={handleChange}
+            className="px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-white bg-white bg-opacity-90 text-gray-900 placeholder-gray-600 text-lg"
           />
-          <select className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50">
-            <option value="">Interested in</option>
-            <option value="1 BHK">1 BHK</option>
-            <option value="2 BHK">2 BHK</option>
-            <option value="3 BHK">3 BHK</option>
-            <option value="Condo">Condo</option>
-            <option value="Villa">Villa</option>
-            <option value="Plot">Plot</option>
-            <option value="Rent">Rent</option>
-          </select>
+          <div className="relative">
+            <select
+              name="interest"
+              value={formData.interest}
+              onChange={handleChange}
+              className="px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-white bg-white bg-opacity-90 text-gray-900 font-semibold text-lg w-full appearance-none"
+            >
+              <option value="">Interested in</option>
+              <option value="1 BHK">
+                <div className="flex items-center gap-2">
+                  <Home size={16} /> 1 BHK
+                </div>
+              </option>
+              <option value="2 BHK">
+                <div className="flex items-center gap-2">
+                  <HomeIcon size={18} /> 2 BHK
+                </div>
+              </option>
+              <option value="3 BHK">
+                <div className="flex items-center gap-2">
+                  <Building size={20} /> 3 BHK
+                </div>
+              </option>
+              <option value="Condo">
+                <div className="flex items-center gap-2">
+                  <Castle size={20} /> Condo
+                </div>
+              </option>
+              <option value="Villa">
+                <div className="flex items-center gap-2">
+                  <Hotel size={20} /> Villa
+                </div>
+              </option>
+              <option value="Plot">
+                <div className="flex items-center gap-2">
+                  <LandPlot size={20} /> Plot
+                </div>
+              </option>
+              <option value="Rent">
+                <div className="flex items-center gap-2">
+                  <Home size={20} /> Rent
+                </div>
+              </option>
+            </select>
+            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+              <Home className="text-gray-600" size={20} />
+            </div>
+          </div>
 
           {/* Submit Button */}
           <button
             type="submit"
-            className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-2 rounded-md hover:opacity-90 transition font-semibold"
+            className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 rounded-md hover:opacity-90 transition font-semibold text-lg"
           >
             Submit
           </button>
         </form>
       </motion.div>
 
-      {/* Minimized Form (Half-transparent, Middle-right of screen) */}
+      {/* Minimized Form (Gradient Background, Middle-right of screen) */}
       {isMinimized && (
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.5 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="fixed top-1/2 right-0 transform -translate-y-1/2 w-1/6 min-w-[200px] bg-white border border-gray-400 p-3 rounded-l-lg shadow-lg cursor-pointer hover:opacity-100 z-40"
+          className="fixed top-1/2 right-0 transform -translate-y-1/2 w-1/6 min-w-[200px] bg-gradient-to-r from-blue-500 to-indigo-600 bg-opacity-60 border-4 border-navy-800 p-4 rounded-l-lg shadow-lg cursor-pointer hover:opacity-90 z-40"
           onClick={() => {
             setIsOpen(true);
             setIsMinimized(false);
           }}
         >
-          <p className="text-center text-blue-600 font-semibold">Get a Call Back</p>
+          <p className="text-center text-white font-semibold font-poppins">
+            Get a Call Back
+          </p>
         </motion.div>
       )}
     </>
