@@ -9,7 +9,6 @@ const LeadForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     number: "",
-    email:"",
     interest: "",
   });
 
@@ -38,7 +37,6 @@ const LeadForm = () => {
     setFormData({
       name: "",
       number: "",
-      email:"",
       interest: "",
     });
   };
@@ -60,7 +58,7 @@ const LeadForm = () => {
         initial={{ scale: 0.5, opacity: 0 }}
         animate={isOpen ? { scale: 1, opacity: 1 } : { opacity: 0 }}
         transition={{ type: "spring", stiffness: 100 }}
-        className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/3 min-w-[400px] bg-gradient-to-br from-gray-600 to-gray-800 bg-opacity-60 shadow-2xl rounded-lg p-8 border-4 border-navy-800 z-50 ${
+        className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-11/12 sm:w-3/4 md:w-1/2 lg:w-1/3 min-w-[300px] bg-gradient-to-br from-gray-600 to-gray-800 bg-opacity-60 shadow-2xl rounded-lg p-8 border-4 border-navy-800 z-50 ${
           isOpen ? "block" : "hidden"
         }`}
       >
@@ -157,13 +155,14 @@ const LeadForm = () => {
         </form>
       </motion.div>
 
-      {/* Minimized Form (Gradient Background, Middle-right of screen) */}
+      {/* Minimized Form */}
       {isMinimized && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="fixed top-1/2 right-0 transform -translate-y-1/2 w-1/6 min-w-[200px] bg-gradient-to-r from-blue-500 to-indigo-600 bg-opacity-60 border-4 border-navy-800 p-4 rounded-l-lg shadow-lg cursor-pointer hover:opacity-90 z-40"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
+          className="fixed top-25 right-4 w-1/4 sm:w-1/5 min-w-[150px] bg-gradient-to-br  from-blue-500 to-indigo-600 bg-opacity-70 border-4 border-navy-800 p-4 rounded-lg shadow-lg cursor-pointer hover:opacity-90 z-40"
           onClick={() => {
             setIsOpen(true);
             setIsMinimized(false);

@@ -29,7 +29,7 @@ function Navbar() {
         }`}
       >
         <li className="relative group">
-          <button className="hover:text-blue-600 transition duration-300">
+          <button className="hover:text-blue-600 text-2xl font-bold transition duration-300">
             Home ▾
           </button>
           <ul className="absolute left-0 hidden group-hover:block bg-white shadow-lg py-2 rounded-md w-32">
@@ -42,7 +42,7 @@ function Navbar() {
           </ul>
         </li>
         <li className="relative group">
-          <button className="hover:text-blue-600 transition duration-300">
+          <button className="hover:text-blue-600 text-2xl font-bold transition duration-300">
             Listings ▾
           </button>
           <ul className="absolute left-0 hidden group-hover:block bg-white shadow-lg py-2 rounded-md w-32">
@@ -55,7 +55,7 @@ function Navbar() {
           </ul>
         </li>
         <li className="relative group">
-          <button className="hover:text-blue-600 transition duration-300">
+          <button className="hover:text-blue-600 text-2xl font-bold transition duration-300">
             Members ▾
           </button>
           <ul className="absolute left-0 hidden group-hover:block bg-white shadow-lg py-2 rounded-md w-32">
@@ -68,7 +68,7 @@ function Navbar() {
           </ul>
         </li>
         <li className="relative group">
-          <button className="hover:text-blue-600 transition duration-300">
+          <button className="hover:text-blue-600 text-2xl font-bold transition duration-300">
             Blog ▾
           </button>
           <ul className="absolute left-0 hidden group-hover:block bg-white shadow-lg py-2 rounded-md w-32">
@@ -81,7 +81,7 @@ function Navbar() {
           </ul>
         </li>
         <li className="relative group">
-          <button className="hover:text-blue-600 transition duration-300">
+          <button className="hover:text-blue-600 text-2xl font-bold transition duration-300">
             Pages ▾
           </button>
           <ul className="absolute left-0 hidden group-hover:block bg-white shadow-lg py-2 rounded-md w-32">
@@ -91,7 +91,7 @@ function Navbar() {
             <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">FAQ</li>
           </ul>
         </li>
-        <li className="hover:text-blue-600 cursor-pointer transition duration-300">
+        <li className="hover:text-blue-600 text-2xl font-bold cursor-pointer transition duration-300">
           Contact
         </li>
       </ul>
@@ -101,25 +101,25 @@ function Navbar() {
         <img
           src="/logo.png"
           alt="JustHome Logo"
-          className="border-dotted h-8 w-40 mr-2"
+          className=" h-12 w-50 mr-0"
         />
       </div>
 
       {/* Right Side - Contact & Buttons */}
       <div className="flex items-center space-x-4">
         {/* Contact Info (Hidden on Mobile) */}
-        <div className="hidden lg:flex items-center text-gray-700 font-semibold text-lg">
+        <div className="hidden lg:flex text-xl font-bold items-center text-gray-700">
           <FaPhoneAlt className="mr-2 text-blue-600" />
           <span>+68 685 88666</span>
         </div>
 
         {/* User Profile */}
-        <button className="p-2 border border-gray-400 rounded-full hover:bg-gray-200 transition duration-300">
+        <button className="p-2 border-4 border-gray-400  rounded-full hover:bg-gray-200 transition duration-300">
           <FaUser className="text-gray-700" />
         </button>
 
         {/* Add Property Button (Hidden on Mobile) */}
-        <button className="hidden lg:block border border-gray-500 px-4 py-2 rounded-lg hover:bg-gray-200 transition duration-300 font-semibold text-lg">
+        <button className="hidden lg:block text-xl text-gray-800 font-bold border-4 border-gray-400 px-4 py-2 rounded-lg hover:bg-gray-200 transition duration-300">
           Add Property
         </button>
       </div>
